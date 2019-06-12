@@ -13,7 +13,7 @@ namespace Kopiranje_datoteka
 {
     public partial class Kopiranje_Datoteke : Form
     {
-        BackgroundWorker radnik = new BackgroundWorker();
+        private BackgroundWorker KopiranjeDato = new BackgroundWorker();
         FolderBrowserDialog fbd = new FolderBrowserDialog();
         OpenFileDialog ofd = new OpenFileDialog();
 
@@ -23,12 +23,12 @@ namespace Kopiranje_datoteka
         {
             InitializeComponent();
 
-            radnik.WorkerReportsProgress = true;
-            radnik.WorkerSupportsCancellation = true;
+            KopiranjeDato.WorkerReportsProgress = true;
+            KopiranjeDato.WorkerSupportsCancellation = true;
 
-            radnik.DoWork += new DoWorkEventHandler(Datoteka_DoWork);
-            radnik.ProgressChanged += new ProgressChangedEventHandler(Datoteka_ProgressChanged);
-            radnik.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Datoteka_RunWorkerCompleted);
+            KopiranjeDato.DoWork += new DoWorkEventHandler(Datoteka_DoWork);
+            KopiranjeDato.ProgressChanged += new ProgressChangedEventHandler(Datoteka_ProgressChanged);
+            KopiranjeDato.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Datoteka_RunWorkerCompleted);
             
         }
 
@@ -50,7 +50,7 @@ namespace Kopiranje_datoteka
                     while ((bytesRead = fs.Read(bytes, 0, bufferSize)) > 0)
                     {
                         UpisujemU.Write(bytes, 0, bytesRead);
-                        radnik.ReportProgress((int)(fs.Position * 100 / fs.Length));
+                        KopiranjeDato.ReportProgress((int)(fs.Position * 100 / fs.Length));
                     }
 
                     fs.Close();
@@ -65,7 +65,7 @@ namespace Kopiranje_datoteka
 
         private void Datoteka_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            Tekst.Text = e.ProgressPercentage.ToString();
+            Tekst.Text = e.ProgressPercentage.ToString()+"%";
             progressBar1.Value = e.ProgressPercentage;
         }
 
@@ -91,7 +91,7 @@ namespace Kopiranje_datoteka
         {
 
             
-                if ((radnik.CancellationPending == true))
+                if ((KopiranjeDato.CancellationPending == true))
                 {
                     e.Cancel = true;
                     return;
@@ -100,7 +100,6 @@ namespace Kopiranje_datoteka
                 {
                     // Obavljanje zahtjevne operacije i proslijeđivanje statusa
                     Copy(original, kopija+ @"\" + Path.GetFileName(original));
-                    //radnik.ReportProgress ();
                 }
             
         }
@@ -116,19 +115,24 @@ namespace Kopiranje_datoteka
 
         private void Kopiraj_Click(object sender, EventArgs e)
         {
-            if (radnik.IsBusy != true)
+            if (KopiranjeDato.IsBusy != true)
             {
                 // Metodom RunWorkerAsync se pokreće izvođenje operacije u pozadini
-                radnik.RunWorkerAsync();
+                KopiranjeDato.RunWorkerAsync();
             }
         }
 
         private void Zaustavi_Click(object sender, EventArgs e)
         {
-            radnik.CancelAsync();
+            KopiranjeDato.CancelAsync();
         }
 
-        private void Tekst_Click(object sender, EventArgs e)
+        private void Posto_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar_Click(object sender, EventArgs e)
         {
 
         }
