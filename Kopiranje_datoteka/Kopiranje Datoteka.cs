@@ -26,35 +26,35 @@ namespace Kopiranje_datoteka
             radnik.WorkerReportsProgress = true;
             radnik.WorkerSupportsCancellation = true;
 
-            radnik.DoWork += new DoWorkEventHandler(radnik_DoWork);
+            radnik.DoWork += new DoWorkEventHandler(Datoteka_DoWork);
             radnik.ProgressChanged += new ProgressChangedEventHandler(radnik_ProgressChanged);
             radnik.RunWorkerCompleted += new RunWorkerCompletedEventHandler(radnik_RunWorkerCompleted);
             
         }
 
-        private void Copy(string ulaznaputanja, string izlaznaputanja)
+        private void Copy(string UlazIz, string CitamIz)
         {
             int bufferSize = 1024 * 1024;
 
 
             try
             {
-            using (FileStream fileStream = new FileStream(izlaznaputanja, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
+            using (FileStream UpisujemU = new FileStream(CitamIz, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite))
             //using (FileStream fs = File.Open(<file-path>, FileMode.Open, FileAccess.Read, FileShare.Read))
             {
-                    FileStream fs = new FileStream(ulaznaputanja, FileMode.Open, FileAccess.ReadWrite);
-                    fileStream.SetLength(fs.Length);
+                    FileStream fs = new FileStream(UlazIz, FileMode.Open, FileAccess.ReadWrite);
+                    UpisujemU.SetLength(fs.Length);
                     int bytesRead = -1;
                     byte[] bytes = new byte[bufferSize];
 
                     while ((bytesRead = fs.Read(bytes, 0, bufferSize)) > 0)
                     {
-                        fileStream.Write(bytes, 0, bytesRead);
+                        UpisujemU.Write(bytes, 0, bytesRead);
                         radnik.ReportProgress((int)(fs.Position * 100 / fs.Length));
                     }
 
                     fs.Close();
-                    fileStream.Close();
+                    UpisujemU.Close();
                 }
             }
             catch (Exception e)
@@ -87,7 +87,7 @@ namespace Kopiranje_datoteka
             }
         }
 
-        private void radnik_DoWork(object sender, DoWorkEventArgs e)
+        private void Datoteka_DoWork(object sender, DoWorkEventArgs e)
         {
 
             for (int i = 1; (i <= 100); i++)
