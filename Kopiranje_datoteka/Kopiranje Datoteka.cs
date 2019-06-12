@@ -27,8 +27,8 @@ namespace Kopiranje_datoteka
             radnik.WorkerSupportsCancellation = true;
 
             radnik.DoWork += new DoWorkEventHandler(Datoteka_DoWork);
-            radnik.ProgressChanged += new ProgressChangedEventHandler(radnik_ProgressChanged);
-            radnik.RunWorkerCompleted += new RunWorkerCompletedEventHandler(radnik_RunWorkerCompleted);
+            radnik.ProgressChanged += new ProgressChangedEventHandler(Datoteka_ProgressChanged);
+            radnik.RunWorkerCompleted += new RunWorkerCompletedEventHandler(Datoteka_RunWorkerCompleted);
             
         }
 
@@ -63,13 +63,13 @@ namespace Kopiranje_datoteka
             }
         }  
 
-        private void radnik_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        private void Datoteka_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             Tekst.Text = e.ProgressPercentage.ToString();
             progressBar1.Value = e.ProgressPercentage;
         }
 
-        private void radnik_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        private void Datoteka_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             if ((e.Cancelled == true))
             {
@@ -90,20 +90,19 @@ namespace Kopiranje_datoteka
         private void Datoteka_DoWork(object sender, DoWorkEventArgs e)
         {
 
-            for (int i = 1; (i <= 100); i++)
-            {
+            
                 if ((radnik.CancellationPending == true))
                 {
                     e.Cancel = true;
-                    break;
+                    return;
                 }
                 else
                 {
                     // Obavljanje zahtjevne operacije i proslijeđivanje statusa
                     Copy(original, kopija+ @"\" + Path.GetFileName(original));
-                    radnik.ReportProgress((i));
+                    //radnik.ReportProgress ();
                 }
-            }
+            
         }
 
         private void OdaberiFolder_Click(object sender, EventArgs e)

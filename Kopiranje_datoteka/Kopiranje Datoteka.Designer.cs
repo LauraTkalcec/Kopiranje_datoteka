@@ -43,7 +43,6 @@ namespace Kopiranje_datoteka
             this.SuspendLayout();
             // 
             // OdaberiFile
-            // 
             this.OdaberiFile.Location = new System.Drawing.Point(57, 24);
             this.OdaberiFile.Name = "OdaberiFile";
             this.OdaberiFile.Size = new System.Drawing.Size(172, 23);
@@ -53,7 +52,6 @@ namespace Kopiranje_datoteka
             this.OdaberiFile.Click += new System.EventHandler(this.OdaberiFile_Click);
             // 
             // OdaberiFolder
-            // 
             this.OdaberiFolder.Location = new System.Drawing.Point(57, 70);
             this.OdaberiFolder.Name = "OdaberiFolder";
             this.OdaberiFolder.Size = new System.Drawing.Size(172, 23);
@@ -63,22 +61,19 @@ namespace Kopiranje_datoteka
             this.OdaberiFolder.Click += new System.EventHandler(this.OdaberiFolder_Click);
             // 
             // progressBar1
-            // 
             this.progressBar1.Location = new System.Drawing.Point(226, 193);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(371, 42);
             this.progressBar1.TabIndex = 2;
             // 
             // textBox1
-            // 
             this.textBox1.Location = new System.Drawing.Point(254, 27);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(508, 20);
             this.textBox1.TabIndex = 3;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // textBox2
-            // 
+            // textBox2 
             this.textBox2.Location = new System.Drawing.Point(254, 72);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(508, 20);
@@ -86,7 +81,6 @@ namespace Kopiranje_datoteka
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // Kopiraj
-            // 
             this.Kopiraj.Location = new System.Drawing.Point(35, 193);
             this.Kopiraj.Name = "Kopiraj";
             this.Kopiraj.Size = new System.Drawing.Size(172, 42);
@@ -96,7 +90,6 @@ namespace Kopiranje_datoteka
             this.Kopiraj.Click += new System.EventHandler(this.Kopiraj_Click);
             // 
             // Zaustavi
-            // 
             this.Zaustavi.Location = new System.Drawing.Point(603, 193);
             this.Zaustavi.Name = "Zaustavi";
             this.Zaustavi.Size = new System.Drawing.Size(172, 42);
@@ -116,7 +109,6 @@ namespace Kopiranje_datoteka
             this.Tekst.Click += new System.EventHandler(this.Tekst_Click);
             // 
             // Kopiranje_Datoteke
-            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
@@ -130,13 +122,13 @@ namespace Kopiranje_datoteka
             this.Controls.Add(this.OdaberiFile);
             this.Name = "Kopiranje_Datoteke";
             this.Text = "Kopiranje Datoteka";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.KopiranjeDatoteke_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void KopiranjeDatoteke_Load(object sender, EventArgs e)
         {
         }
 
